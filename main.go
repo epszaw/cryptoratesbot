@@ -23,9 +23,7 @@ var (
 )
 
 func init() {
-	err := godotenv.Load()
-
-	if err != nil {
+	if err := godotenv.Load(); err != nil {
 		panic(fmt.Errorf("can't load env file: %v", err))
 	}
 

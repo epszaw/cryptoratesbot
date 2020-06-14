@@ -68,7 +68,7 @@ func (u UserMongoStorage) GetUsersForNotification(now int64) ([]storage.User, er
 		}
 
 		// interval stored in minutes
-		interval := user.Interval * 360
+		interval := user.Interval * 60
 		lastReply := user.LastReply
 
 		if now-lastReply < interval {
