@@ -5,10 +5,15 @@
 ## Commands
 
 `/start` - show usage manual
+
 `/add <symbol> <symbol>` - add crypto currency traiding pair to report
+
 `/remove` - remove existing pair from reports
+
 `/interval <minutes>` - setup notifications interval
+
 `/suspend` - stop notifications
+
 `/resume` - resume notifications
 
 ## Deploy
