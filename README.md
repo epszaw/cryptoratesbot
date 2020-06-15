@@ -16,6 +16,8 @@
 
 `/resume` - resume notifications
 
+`/check` - check prices immediately
+
 ## Deploy
 
 You should have `docker` and `docker-compose`.

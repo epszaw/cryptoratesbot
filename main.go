@@ -77,6 +77,7 @@ func main() {
 	botHandler.AddCommandHandler("suspend", handler.SuspendCommand(userStorage))
 	botHandler.AddCommandHandler("resume", handler.ResumeCommand(userStorage))
 	botHandler.AddCommandHandler("interval", handler.IntervalCommand(userStorage))
+	botHandler.AddCommandHandler("check", handler.CheckCommand(binanceService))
 	botHandler.AddCallbackQueryHander("remove", handler.RemoveCallback(userStorage))
 
 	go scheduler.StartNotifications(time.Second * 5)

@@ -3,15 +3,18 @@ package template
 import (
 	"fmt"
 	"lamartire/cryptoratesbot/service"
+	"sort"
+	"strings"
 )
 
 func FormatSymbolsPrices(prices []service.SymbolPrice) string {
-	var result string
+	var result []string
 
 	for _, price := range prices {
-		result += fmt.Sprintf("[%s] %s", price.Symbol, price.Price)
-		result += "\n"
+		result = append(result, fmt.Sprintf("[%s] %s", price.Symbol, price.Price))
 	}
 
-	return result
+	sort.Strings(result)
+
+	return strings.Join(result, "\n")
 }

@@ -28,6 +28,8 @@ func StartCommand() Function {
 		message += "/resume - возобновление уведомлений"
 		message += "\n"
 		message += "/interval <минуты> - установка интервала уведомлений"
+		message += "\n"
+		message += "/check - моментальная проверка курса"
 
 		reply := tgbotapi.NewMessage(chatID, message)
 
@@ -232,6 +234,31 @@ func IntervalCommand(userStorage storage.UserStorage) Function {
 
 		if _, err := bot.Send(reply); err != nil {
 			logrus.Errorf("interval command: send message %v", err)
+			return
+		}
+	}
+}
+
+func CheckCommand(exchangeService service.CryptoExchangeService) Function {
+	return func(bot bot.Bot, user storage.User, update tgbotapi.Update) {
+		var message string
+
+		chatID := update.Message.Chat.ID
+		symbols := user.Symbols
+
+		if len(symbols) == 0 {
+			message = "У тебя нет ни одной наблюдаемой пары"
+		}
+
+		if message == "" {
+			prices := exchangeService.GetSymbolsPrices(symbols)
+			message = template.FormatSymbolsPrices(prices)
+		}
+
+		reply := tgbotapi.NewMessage(chatID, message)
+
+		if _, err := bot.Send(reply); err != nil {
+			logrus.Errorf("check command: send message %v", err)
 			return
 		}
 	}
